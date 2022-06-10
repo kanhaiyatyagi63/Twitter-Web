@@ -3,6 +3,7 @@
     public interface ITwitterUrlService
     {
         string AccessToken();
-        string GetUserByUserNameUrl(string username, string? queryParams = null);
+        string GetUserByUserNameUrl(string username, Dictionary<string, string> paramas);
+        string GetUserTweetTimeLineUrl(string userId, Dictionary<string, string> paramas);
     }
 }

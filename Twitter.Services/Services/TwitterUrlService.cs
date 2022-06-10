@@ -1,4 +1,6 @@
-﻿using Twitter.Services.Services.Abstractions;
+﻿using System.Web;
+using Twitter.Services.Services.Abstractions;
+using Twitter.Services.Utilities;
 
 namespace Twitter.Services.Services;
 public class TwitterUrlService : ITwitterUrlService
@@ -16,12 +18,23 @@ public class TwitterUrlService : ITwitterUrlService
     }
 
     #region user
-    public string GetUserByUserNameUrl(string username, string? queryParams = null)
-    { 
-        if (string.IsNullOrEmpty(queryParams))
+    public string GetUserByUserNameUrl(string username, Dictionary<string, string> paramas)
+    {
+        var queryParamas = Utility.GetQueryParams(paramas);
+        if (string.IsNullOrEmpty(queryParamas))
             return $"{_baseURL}/2/users/by/username/{username}";
-        return $"{_baseURL}/2/users/by/username/{username}?{queryParams}";
+        return $"{_baseURL}/2/users/by/username/{username}?{queryParamas}";
     }
 
+    #endregion
+
+    #region timeline
+    public string GetUserTweetTimeLineUrl(string userId, Dictionary<string, string> paramas)
+    {
+        var queryParamas = Utility.GetQueryParams(paramas);
+        if (string.IsNullOrEmpty(queryParamas))
+            return $"{_baseURL}2/users/{userId}/tweets";
+        return $"{_baseURL}/2/users/{userId}/tweets?{queryParamas}";
+    }
     #endregion
 }
