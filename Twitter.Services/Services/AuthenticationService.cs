@@ -28,7 +28,7 @@ namespace Twitter.Services.Services
         }
         #endregion
 
-        public async Task<bool> GenerateAccessToken()
+        public async Task<bool> GenerateAccessTokenAsync()
         {
             if (!string.IsNullOrWhiteSpace(AccessToken))
                 return true;

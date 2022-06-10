@@ -14,4 +14,14 @@ public class TwitterUrlService : ITwitterUrlService
     {
         return $"{_baseURL}/oauth2/token";
     }
+
+    #region user
+    public string GetUserByUserNameUrl(string username, string? queryParams = null)
+    { 
+        if (string.IsNullOrEmpty(queryParams))
+            return $"{_baseURL}/2/users/by/username/{username}";
+        return $"{_baseURL}/2/users/by/username/{username}?{queryParams}";
+    }
+
+    #endregion
 }

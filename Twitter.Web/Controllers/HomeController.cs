@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Twitter.Services;
-using Twitter.Services.Services.Abstractions;
+using Twitter.Services.Constants;
 using Twitter.Web.Models;
 
 namespace Twitter.Web.Controllers
@@ -10,9 +10,9 @@ namespace Twitter.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ITwitterWorkerService _twitterWorkerService;
-        private readonly ITweetService _tweetService;
 
-        public HomeController(ILogger<HomeController> logger, ITwitterWorkerService twitterWorkerService)
+        public HomeController(ILogger<HomeController> logger,
+                              ITwitterWorkerService twitterWorkerService)
         {
             _logger = logger;
             _twitterWorkerService = twitterWorkerService;
@@ -20,8 +20,8 @@ namespace Twitter.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var tokenUrl  = _twitterWorkerService.TwitterUrlService.AccessToken();
-            var isGenerated = await _twitterWorkerService.AuthenticationService.GenerateAccessToken();
+
+           
             return View();
         }
 

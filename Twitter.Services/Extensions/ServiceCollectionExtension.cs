@@ -21,6 +21,7 @@ public static class ServiceCollectionExtension
         services.AddScoped<ITweetService, TweetService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<ITwitterWorkerService, TwitterWorkerService>();
+        services.AddScoped<ITimeLineService, TimeLineService>();
     }
 
     public static void AddTwitter(this IServiceCollection services, Action<TwitterSettings> configureTwitterSettings)

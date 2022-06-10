@@ -1,10 +1,21 @@
-﻿namespace Twitter.Services.Constants
+﻿namespace Twitter.Services.Constants;
+public class TimeLineExpensions
 {
-    public class Expensions
-    {
-        //[{"key":"expansions","value":"attachments.media_keys","equals":true,"description":"Comma-separated list of fields to expand.
-        //Expansions enable requests to expand an ID into a full object in the includes response object.
-        //\n\nAllowed values: attachments.poll_ids,attachments.media_keys,author_id,geo.place_id,in_reply_to_user_id,referenced_tweets.id,entities.mentions.username,referenced_tweets.id.author_id\n\n
-        //Default values: none","enabled":true}]
-    }
+
+    //Comma-separated list of fields to expand.
+    //Default values: none
+    public static string AttachmentsPollIds = "attachments.poll_ids";
+    public static string AttachmentsMediaKeys = "attachments.media_keys";
+    public static string GeoPlaceId = "geo.place_id";
+    public static string InReplyToUserId = "in_reply_to_user_id";
+    public static string ReferencedTweetsId = "referenced_tweets.id";
+    public static string EntitiesMentionsUsername = "entities.mentions.username";
+    public static string ReferencedTweetsIdAuthorId = "referenced_tweets.id.author_id";
+}
+
+public class UserExpensions
+{
+    //Expansions enable requests to expand an ID into a full object in the includes response object.
+    //Default value: none
+    public static string PinnedTweetId = "pinned_tweet_id";
 }

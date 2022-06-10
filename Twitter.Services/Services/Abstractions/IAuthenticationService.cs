@@ -2,6 +2,6 @@
 public interface IAuthenticationService
 {
     HttpClient GetAuthorizedClient();
-    Task<bool> GenerateAccessToken();
+    Task<bool> GenerateAccessTokenAsync();
     string GetAccessToken();
 }

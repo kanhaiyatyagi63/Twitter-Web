@@ -7,14 +7,17 @@ namespace Twitter.Services
         public IAuthenticationService AuthenticationService { get; }
         public IUserService UserService { get; }
         public ITwitterUrlService TwitterUrlService { get; }
+        public ITimeLineService TimeLineService { get; }
 
         public TwitterWorkerService(IAuthenticationService authenticationService,
-                                    IUserService userService, 
-                                    ITwitterUrlService twitterUrlService)
+                                    IUserService userService,
+                                    ITwitterUrlService twitterUrlService,
+                                    ITimeLineService timeLineService)
         {
             AuthenticationService = authenticationService;
             UserService = userService;
             TwitterUrlService = twitterUrlService;
+            TimeLineService = timeLineService;
         }
     }
 }
