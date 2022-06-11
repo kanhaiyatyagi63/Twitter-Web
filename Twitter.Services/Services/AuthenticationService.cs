@@ -15,8 +15,11 @@ namespace Twitter.Services.Services
         private readonly ITwitterUrlService _twitterUrlService;
         public AuthenticationService(TwitterSettings twitterSettings)
         {
+            if(twitterSettings is null)
+                throw new ArgumentNullException(nameof(twitterSettings));
+
             _twitterSettings = twitterSettings;
-            _twitterUrlService = new TwitterUrlService(twitterSettings.Url);
+            _twitterUrlService = new TwitterUrlService(twitterSettings);
             _basicToken = ConvertSettingsIntoBase64(twitterSettings.ClientId, twitterSettings.ClientSecret);
         }
 

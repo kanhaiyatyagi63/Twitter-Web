@@ -10,6 +10,7 @@ builder.Services.AddTwitter(config =>
     config.Url = "https://api.twitter.com";
     config.ClientId = "Z9kj8JXssqU5Fmym39fxYbYfi";
     config.ClientSecret = "WF2tPvO4sxErhIblIfS0Ke8FFwbZiBpleLt7zHp400az1FIOPO";
+    config.TweetCount = "5"; //should be less than or equal to 100
 });
 
 var app = builder.Build();

@@ -15,7 +15,7 @@ public static class ServiceCollectionExtension
 
         services.AddScoped<ITwitterUrlService>(factory =>
         {
-            return new TwitterUrlService(twitterSetting.Url);
+            return new TwitterUrlService(twitterSetting);
         });
 
         services.AddScoped<ITweetService, TweetService>();

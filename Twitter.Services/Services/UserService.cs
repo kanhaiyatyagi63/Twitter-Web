@@ -22,14 +22,7 @@ public class UserService : IUserService
         if (!await _authenticationService.GenerateAccessTokenAsync())
             throw new ArgumentNullException("unable to generate twitter token");
 
-        var url = string.Empty;
-        if (paramas is null || !paramas.Any())
-            url = _twitterUrlService.GetUserByUserNameUrl(username);
-        else
-        {
-            var queryParamas = Utility.GetQueryParams(paramas);
-            url = _twitterUrlService.GetUserByUserNameUrl(username, queryParamas);
-        }
+        var url = _twitterUrlService.GetUserByUserNameUrl(username, paramas);
 
         HttpClient client = _authenticationService.GetAuthorizedClient();
 
@@ -39,6 +32,11 @@ public class UserService : IUserService
             return null;
 
         return await httpResponse.ParseResponseData<UserResponseModel>();
+    }
+
+    public string GetMaxResultForQuery()
+    {
+        return _twitterUrlService.MaxResultForQuery();
     }
 
 }

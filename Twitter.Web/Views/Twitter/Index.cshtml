@@ -1,6 +1,109 @@
-﻿@{
+﻿@model Twitter.Services.Models.ResponseModels.TimeLine.TimeLineResponseModel;
+
+@{
     ViewData["Title"] = "Index";
 }
-<h1>@ViewData["Title"]</h1>
-
 <p>Welcome to the twitter tweets.</p>
+<div class="container mt-10">
+    <div>
+        @if (ViewBag.error != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.error
+            </div>
+        }
+        @if (ViewBag.success != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.error
+            </div>
+        }
+    </div>
+    <div class="row">
+        <h1>Search criteria</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label>Username</label>
+            <input type="text" value="@ViewBag.Username" class="form-control" id="text_username" />
+        </div>
+
+        <div class="col-sm-3">
+            <label>Start Date</label>
+            <input type="date" value="@ViewBag.StartDate" class="form-control" id="datepicker1">
+        </div>
+        <div class="col-sm-3">
+            <label>End Date</label>
+            <input type="date" value="@ViewBag.EndDate" class="form-control" id="datepicker2">
+        </div>
+        <div class="col-sm-3 text-center mt-4">
+            <button id="btn_submit" type="button" class="btn btn-sm btn-primary"> Search</button>
+            <button id="btn_reset" type="button" class="btn btn-sm btn-danger mr-3"> Clear</button>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+@if (Model != null && Model.Data != null)
+{
+    <div class="row">
+        @foreach (var response in Model.Data)
+        {
+            <div class="col-sm-4">
+                @{
+                    var url = $"https://twitter.com/{ViewBag.Username}/status/{response.Id}";
+                    <blockquote class="twitter-tweet">
+                        <p lang="@response.Lang" dir="ltr">
+                            @response.Text
+                        </p>&mdash;
+                        <a href="@Url.Content(url)"></a>
+                    </blockquote>
+                }
+            </div>
+        }
+    </div>
+}
+else
+{
+
+    <div class="fw-bold">No tweets available</div>
+}
+@section Scripts{
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script>
+        $(function() {
+            $("#btn_submit").click(function() {
+                let filters = {
+                    startDate: $("#datepicker1").val(),
+                    endDate: $("#datepicker2").val(),
+                    username: $("#text_username").val()
+                }
+                if (!filters.username) {
+                    alert("username is required!");
+                    return;
+                }
+                if (!filters.startDate && filters.endDate) {
+                    alert("start date is required!");
+                    return;
+                }
+                if (filters.startDate && !filters.endDate) {
+                    alert("end date is required!");
+                    return;
+                }
+                const queryParamas = jQuery.param(filters);
+
+                let currentURL = window.location.href.split("?")[0] + "?" + queryParamas;
+                window.location = currentURL;
+            });
+
+            $("#btn_reset").click(function() {
+                debugger;
+                $("#datepicker1").val("");
+                $("#datepicker2").val("");
+                $("#text_username").val("");
+                alert("filter criteria reseted!");
+            });
+        });
+    </script>
+}
