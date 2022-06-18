@@ -20,4 +20,4 @@ another is web project which consume twitter services and display any user tweet
 
 # Licence
 
-MVC.Tailwind under the [MIT](https://github.com/kanhaiyatyagi63/Twitter-web/blob/master/LICENSE.md)
+Twitter-web under the [MIT](https://github.com/kanhaiyatyagi63/Twitter-Web/blob/master/License.md)
